@@ -73,8 +73,8 @@
       <p align="center">
         Hanke Xie<sup>1,2</sup><sup>,*</sup>, Haopeng Lin<sup>2</sup><sup>,*</sup>, Wenxiao Cao<sup>2</sup>, Dake Guo<sup>1</sup>, Wenjie Tian<sup>1</sup>, 
         Jun Wu<sup>2</sup>, Hanlin Wen<sup>2</sup>, Ruixuan Shang<sup>2</sup>, Hongmei Liu<sup>2</sup>, Zhiqi Jiang<sup>2</sup>, 
-        Yuepeng Jiang<sup>1</sup>, Wenxi Chen<sup>2,3</sup><sup>,†</sup>, Ruiqi Yan<sup>2,3</sup><sup>,†</sup>, Jiale Qian<sup>2</sup>, Yichao Yan<sup>2</sup>, 
-        Shunshun Yin<sup>2</sup>, Ming Tao<sup>2</sup>, Xie Chen<sup>3</sup>, Lei Xie<sup>1</sup><sup>,╀</sup>, Xinsheng Wang<sup>2</sup><sup>,‡</sup>
+        Yuepeng Jiang<sup>1</sup>, Wenxi Chen<sup>2,3</sup>, Ruiqi Yan<sup>2,3</sup>, Jiale Qian<sup>2</sup>, Yichao Yan<sup>2</sup>, 
+        Shunshun Yin<sup>2</sup>, Ming Tao<sup>2</sup>, Xie Chen<sup>3</sup>, Lei Xie<sup>1</sup><sup>,‡</sup>, Xinsheng Wang<sup>2</sup><sup>,‡</sup>
       </p>      
       <p align="center">
         <sup>1</sup> Audio, Speech and Language Processing Group (ASLP@NPU), Northwestern Polytechnical University, Xi’an, China <br>
@@ -103,7 +103,7 @@
       ">
         <a href="#abstract" class="nav-link">Abstract</a>
         <a href="#video" class="nav-link">Demo Video</a>
-        <a href="#model" class="nav-link">Model Overview</a>
+        <a href="#model_overview" class="nav-link">Model Overview</a>
         <a href="#podcast-demo" class="nav-link">Podcast Generation</a> 
         <a href="#dialect-demo" class="nav-link">Dialectal Controls</a>
         <a href="#paralinguistic-demo" class="nav-link">Paralinguistic Controls</a>
@@ -131,13 +131,13 @@
         margin: 2em auto;
         width: 95%;
         border-collapse: collapse;
-        text-align: center;
+        text-align: center; /* 默认水平居中 */
         font-size: 1em; 
       }
       .demo-table th, .demo-table td {
         border: 1px solid #ccc;
         padding: 12px 15px;
-        vertical-align: top; /* 保持顶部对齐 */
+        vertical-align: middle; /* 核心修改：默认所有单元格垂直居中 */
       }
       /* 表头样式 */
       .demo-table th {
@@ -147,16 +147,15 @@
       
       /* === (核心修改) 脚本列样式 === */
       .demo-table td:first-child {
-        text-align: left;
-        /* 1. 减小字体 */
-        font-size: 0.9em;
-        /* 2. 减小行距 */
-        line-height: 1.5; 
+        text-align: left;    /* 覆盖水平居中 */
+        font-size: 0.9em;    /* 减小字体 */
+        line-height: 1.5;    /* 减小行距 */
+        vertical-align: top; /* 核心修改：覆盖垂直居中，保持顶部对齐 */
       }
       
       /* 参考音频容器样式 */
       .ref-audio-container {
-        text-align: left;
+        text-align: left; /* 覆盖水平居中 */
         padding-left: 20px !important; 
       }
       .ref-audio-container b {
@@ -207,7 +206,7 @@
       </div>
     </div>
 
-    <h2 id="model overview" style="text-align: center;">Model Overview<a name="model overview"></a></h2>
+    <h2 id="model_overview" style="text-align: center;">Model Overview<a name="model overview"></a></h2>
     <div style="text-align:center;">
       <img src="src/figs/soulxpodcast_v3.png" alt="Model overview of SoulX-Podcast. The model supports cross-dialect prompting, where
       a Mandarin prompt can generate speech in target dialects with Dialect-Guided Prompting (DGP) method." style="width:80%; height:auto;">
@@ -358,13 +357,13 @@
           <td>Sichuanese (四川话)</td>
           <td class="ref-audio-container">
             <b>Speaker 1:</b>
-            <audio controls><source src="raw/prompt/podcast_sichuan_prompt_spk1.wav" type="audio/wav"></audio>
+            <audio controls><source src="raw/prompt/podcast_sichuan_spk1.wav" type="audio/wav"></audio>
             <b>Speaker 2:</b>
-            <audio controls><source src="raw/prompt/podcast_sichuan_prompt_spk2.wav" type="audio/wav"></audio>
+            <audio controls><source src="raw/prompt/podcast_sichuan_spk2.wav" type="audio/wav"></audio>
           </td>
           <td>
             <audio controls style="width: 90%; max-width: 250px;">
-              <source src="raw/samples/podcast_sichuan_furuina_xuzhisheng_short.wav" type="audio/wav">
+              <source src="raw/samples/podcast_sichuan.wav" type="audio/wav">
             </audio>
           </td>
         </tr>
