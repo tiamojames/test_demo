@@ -126,40 +126,46 @@
     <style>
       /* 表格通用美化 */
       .demo-table {
-        margin: 2em auto; /* 增加上下边距 */
+        margin: 2em auto;
         width: 95%;
         border-collapse: collapse;
         text-align: center;
-        font-size: 1em;
+        font-size: 1em; 
       }
       .demo-table th, .demo-table td {
         border: 1px solid #ccc;
-        padding: 12px 15px; /* 统一内边距 */
-        vertical-align: top; /* 重点：内容垂直居上对齐 */
+        padding: 12px 15px;
+        vertical-align: top; /* 保持顶部对齐 */
       }
       /* 表头样式 */
       .demo-table th {
-        background-color: #f4f4f4; /* 浅灰色背景 */
-        font-weight: 600; /* 字体加粗 */
+        background-color: #f4f4f4;
+        font-weight: 600;
       }
-      /* 脚本列：左对齐 */
+      
+      /* === (核心修改) 脚本列样式 === */
       .demo-table td:first-child {
         text-align: left;
+        /* 1. 减小字体 */
+        font-size: 0.9em;
+        /* 2. 减小行距 */
+        line-height: 1.5; 
       }
+      
       /* 参考音频容器样式 */
       .ref-audio-container {
         text-align: left;
-        padding-left: 20px !important; /* 增加左内边距，使其美观 */
+        padding-left: 20px !important; 
       }
       .ref-audio-container b {
         font-size: 0.95em;
         color: #333;
       }
       .ref-audio-container audio {
-        width: 100%; /* 宽度自适应 */
+        width: 100%; 
         max-width: 250px;
         margin-top: 4px;
-        margin-bottom: 8px; /* 增加播放器间距 */
+        margin-bottom: 8px; 
       }
     </style>
     <h2 id="abstract" style="text-align: center;">Abstract<a name="abstract"></a></h2>
@@ -224,16 +230,16 @@
     <table class="demo-table">
       <thead>
         <tr>
-          <th style="width: 45%;">Dialogue Script (Speaker Turns)</th>
-          <th style="width: 27.5%;">Reference Podcast Audio</th>
-          <th style="width: 27.5%;">SoulX-Podcast Generated Audio</th>
+          <th style="width: 50%;">Dialogue Script (Speaker Turns)</th>
+          <th style="width: 25%;">Reference Podcast Audio</th>
+          <th style="width: 25%;">SoulX-Podcast Generated Audio</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
             [S1] 嗯嗯，我想要再 call back 一下，你之前刚刚讲的是，在这个临床上面其实并不能够让它提效。这个是基于 Research 呢？还是基于政策在这个 Policy 这个 level 方面呢，不能提效。我不知道这个能不能帮我们 break down 一下？嗯。
-            <br><br>[S2] 就一方面的话，其实还是技术本身。当然这个次技术，它是一个我觉得是有史以来最伟大的人工智能，在生物学的一个，就是进展和发现和一个提升。但是它还是会出现错误，还是会出现原子重叠的现象。所以这些错误在 biology 这个领域或者药物研发的领域，它是不能容错的，这是一个问题。
+            <br>[S2] 就一方面的话，其实还是技术本身。当然这个次技术，它是一个我觉得是有史以来最伟大的人工智能，在生物学的一个，就是进展和发现和一个提升。但是它还是会出现错误，还是会出现原子重叠的现象。所以这些错误在 biology 这个领域或者药物研发的领域，它是不能容错的，这是一个问题。
           </td>
           <td class="ref-audio-container">
             <b>Speaker 1:</b>
@@ -250,7 +256,7 @@
         <tr>
           <td>
             [S1] 对对对，物物源其实还是挺不错的。就比如说你早，你晚上去可能就没货了，但你早晨去一般都是有货的。像我今天早晨，嗯，他们一看了我就冲进去了。然后基本上平时想买买不到东西全部都有货。
-            <br><br>[S2] 对，说到那个厕纸啊，你说就美国人为什么开始囤厕纸啊？我一开始以为这是谣言。然后呢，其实美国人一直没有反应，直到这上上周，就是呃那个股市熔断啊，然后再加上就是呃，就是宣布，就是各州紧急状况这样子发生。然后呢进超市要排队，结果呢我有，我在去超市的路上看到一对，就是中年夫妇吧，然后两个人两只手都捆满了厕纸。然后我才知道原来这件事情是真的。
+            <br>[S2] 对，说到那个厕纸啊，你说就美国人为什么开始囤厕纸啊？我一开始以为这是谣言。然后呢，其实美国人一直没有反应，直到这上上周，就是呃那个股市熔断啊，然后再加上就是呃，就是宣布，就是各州紧急状况这样子发生。然后呢进超市要排队，结果呢我有，我在去超市的路上看到一对，就是中年夫妇吧，然后两个人两只手都捆满了厕纸。然后我才知道原来这件事情是真的。
           </td>
           <td class="ref-audio-container">
             <b>Speaker 1:</b>
@@ -267,12 +273,12 @@
         <tr>
           <td>
             [S1] I'm sorry for snapping. That was very unprofessional of me. Let's move to the recap of the match.
-            <br><br>[S2] Right it was it was kind of a great one though I mean you gotta admit Alice even though your surrogate did not claim the victory it was really a legendary match almost
-            <br><br>[S1] It really was It was one for the books absolutely Survay and Cerceiv were supposed to meet uh in only four bouts, but there was a bit of a disturbance early on in the match. 
-            <br><br>[S2] Yeah, somebody got onto the field. They were shouting something. I couldn't hear it, Alice. And honestly, I was just glad when the guards finally dragged them away. I just wanted to get back to the joust, but it did disturb the entire thing. And it riled the crowd up too, which was surprising. 
-            <br><br>[S1] It's true, it later reports came out that the person who stormed the field to cause such a ruckus was a protester against Against your uncle, the emperor. 
-            <br><br>[S2] Why would anybody want to protest against my uncle, the emperor? The single greatest living human person, maybe even greater than human person on the face of this planet or any other, you know. 
-            <br><br>[S2] Of course, the emperor is benevolent and generous and A very very kind ruler.  
+            <br>[S2] Right it was it was kind of a great one though I mean you gotta admit Alice even though your surrogate did not claim the victory it was really a legendary match almost
+            <br>[S1] It really was It was one for the books absolutely Survay and Cerceiv were supposed to meet uh in only four bouts, but there was a bit of a disturbance early on in the match. 
+            <br>[S2] Yeah, somebody got onto the field. They were shouting something. I couldn't hear it, Alice. And honestly, I was just glad when the guards finally dragged them away. I just wanted to get back to the joust, but it did disturb the entire thing. And it riled the crowd up too, which was surprising. 
+            <br>[S1] It's true, it later reports came out that the person who stormed the field to cause such a ruckus was a protester against Against your uncle, the emperor. 
+            <br>[S2] Why would anybody want to protest against my uncle, the emperor? The single greatest living human person, maybe even greater than human person on the face of this planet or any other, you know. 
+            <br>[S2] Of course, the emperor is benevolent and generous and A very very kind ruler.  
           </td>
           <td class="ref-audio-container">
             <b>Speaker 1:</b>
@@ -289,7 +295,7 @@
         <tr>
           <td>
             [S1] OK, so the question I've been asking everybody to start with is how did you get into magic? 
-            <br><br>[S2] So, this is phenomenal, actually. I have a fun little tidbit, just recently. Isn't a few days ago, I got a little pop up on my Facebook, um, in my Facebook memories, if that makes sense. Where it actually reminded me of the exact day, literally the exact day that I learned how to play Magic. And it was 9 years ago, and I learned how to play Magic. I'm from Southern California. I had just moved to San Diego, and I didn't know anyone. I knew like four people in the entire city. 
+            <br>[S2] So, this is phenomenal, actually. I have a fun little tidbit, just recently. Isn't a few days ago, I got a little pop up on my Facebook, um, in my Facebook memories, if that makes sense. Where it actually reminded me of the exact day, literally the exact day that I learned how to play Magic. And it was 9 years ago, and I learned how to play Magic. I'm from Southern California. I had just moved to San Diego, and I didn't know anyone. I knew like four people in the entire city. 
           </td>
           <td class="ref-audio-container">
             <b>Speaker 1:</b>
@@ -313,19 +319,19 @@
     <table class="demo-table">
       <thead>
         <tr>
-          <th style="width: 45%;">Dialogue Script</th>
-          <th style="width: 15%;">Target Dialect</th>
-          <th style="width: 20%;">Reference Audio (Source Speaker)</th>
-          <th style="width: 20%;">SoulX-Podcast Generated Audio</th>
+          <th style="width: 55%;">Dialogue Script</th>
+          <th style="width: 10%;">Target Dialect</th>
+          <th style="width: 17.5%;">Reference Audio (Source Speaker)</th>
+          <th style="width: 17.5%;">SoulX-Podcast Generated Audio</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
             [S1] 哈囉大家好啊，歡迎收聽我哋嘅節目。喂，我今日想問你樣嘢啊，你覺唔覺得，嗯，而家揸電動車，最煩，最煩嘅一樣嘢係咩啊？
-            <br><br>[S2] 梗係充電啦。大佬啊，搵個位都已經好煩，搵到個位仲要喺度等，你話快極都要半個鐘一個鐘，真係，有時諗起都覺得好冇癮。
-            <br><br>[S1] 係咪先。如果我而家同你講，充電可以快到同入油差唔多時間，你信唔信先？喂你平時喺油站入滿一缸油，要幾耐啊？五六分鐘？
-            <br><br>[S2] 差唔多啦，七八分鐘，點都走得啦。電車喎，可以做到咁快？你咪玩啦。
+            <br>[S2] 梗係充電啦。大佬啊，搵個位都已經好煩，搵到個位仲要喺度等，你話快極都要半個鐘一個鐘，真係，有時諗起都覺得好冇癮。
+            <br>[S1] 係咪先。如果我而家同你講，充電可以快到同入油差唔多時間，你信唔信先？喂你平時喺油站入滿一缸油，要幾耐啊？五六分鐘？
+            <br>[S2] 差唔多啦，七八分鐘，點都走得啦。電車喎，可以做到咁快？你咪玩啦。
           </td>
           <td>Cantonese (粤语)</td>
           <td class="ref-audio-container">
@@ -343,9 +349,9 @@
         <tr>
           <td>
             [S1]各位《巴适得板》的听众些，大家好噻！我是你们主持人晶晶。今儿天气硬是巴适，不晓得大家是在赶路嘛，还是茶都泡起咯，准备跟我们好生摆一哈龙门阵喃？
-            <br><br>[S2]晶晶好哦，大家安逸噻！我是李老倌。你刚开口就川味十足，"摆龙门阵"几个字一甩出来，我鼻子头都闻到茶香跟火锅香咯！
-            <br><br>[S1]就是得嘛！李老倌，我前些天带个外地朋友切人民公园鹤鸣茶社坐了一哈。他硬是搞不醒豁，为啥子我们一堆人围到杯茶就可以吹一下午壳子，从隔壁子王嬢嬢娃儿耍朋友，扯到美国大选，中间还掺几盘斗地主。他说我们四川人简直是把"摸鱼"刻进骨子里头咯！
-            <br><br>[S2]哈哈，你那个朋友说得倒是有点儿趣，但他莫看到精髓噻。"摆龙门阵"哪是摸鱼嘛，这是我们川渝人特有的交际方式，更是一种活法。外省人天天说的"松弛感"，根根儿就在这龙门阵里头。今天我们就要好生摆一哈，为啥子四川人活得这么舒坦。就先从茶馆这个老窝子说起，看它咋个成了我们四川人的魂儿！
+            <br>[S2]晶晶好哦，大家安逸噻！我是李老倌。你刚开口就川味十足，"摆龙门阵"几个字一甩出来，我鼻子头都闻到茶香跟火锅香咯！
+            <br>[S1]就是得嘛！李老倌，我前些天带个外地朋友切人民公园鹤鸣茶社坐了一哈。他硬是搞不醒豁，为啥子我们一堆人围到杯茶就可以吹一下午壳子，从隔壁子王嬢嬢娃儿耍朋友，扯到美国大选，中间还掺几盘斗地主。他说我们四川人简直是把"摸鱼"刻进骨子里头咯！
+            <br>[S2]哈哈，你那个朋友说得倒是有点儿趣，但他莫看到精髓噻。"摆龙门阵"哪是摸鱼嘛，这是我们川渝人特有的交际方式，更是一种活法。外省人天天说的"松弛感"，根根儿就在这龙门阵里头。今天我们就要好生摆一哈，为啥子四川人活得这么舒坦。就先从茶馆这个老窝子说起，看它咋个成了我们四川人的魂儿！
           </td>
           <td>Sichuanese (四川话)</td>
           <td class="ref-audio-container">
@@ -363,10 +369,10 @@
         <tr>
           <td>
             [S1]哎，大家好啊，欢迎收听咱这一期嘞《瞎聊呗，就这么说》，我是恁嘞老朋友，燕子。
-            <br><br>[S2]大家好，我是老张。燕子啊，今儿瞅瞅你这个劲儿，咋着，是有啥可得劲嘞事儿想跟咱唠唠？
-            <br><br>[S1]哎哟，老张，你咋恁懂我嘞！我跟你说啊，最近我刷手机，老是刷住些可逗嘞方言视频，特别是咱河南话，咦～我哩个乖乖，一听我都憋不住笑，咋说嘞，得劲儿哩很，跟回到家一样。
-            <br><br>[S2]哈哈哈哈，你这回可算说到根儿上了！河南话，咱往大处说说，中原官话，它真嘞是有一股劲儿搁里头。它可不光是说话，它脊梁骨后头藏嘞，是咱一整套、鲜鲜活活嘞过法儿，一种活人嘞道理。
-            <br><br>[S1]活人嘞道理？哎，这你这一说，我嘞兴致“腾”一下就上来啦！觉住咱这嗑儿，一下儿从搞笑视频蹿到文化顶上了啊。那你赶紧给我白话白话，这里头到底有啥道道儿？我特别想知道——为啥一提起咱河南人，好些人脑子里“蹦”出来嘞头一个词儿，就是实在？这个实在，骨子里到底是啥嘞？ 
+            <br>[S2]大家好，我是老张。燕子啊，今儿瞅瞅你这个劲儿，咋着，是有啥可得劲嘞事儿想跟咱唠唠？
+            <br>[S1]哎哟，老张，你咋恁懂我嘞！我跟你说啊，最近我刷手机，老是刷住些可逗嘞方言视频，特别是咱河南话，咦～我哩个乖乖，一听我都憋不住笑，咋说嘞，得劲儿哩很，跟回到家一样。
+            <br>[S2]哈哈哈哈，你这回可算说到根儿上了！河南话，咱往大处说说，中原官话，它真嘞是有一股劲儿搁里头。它可不光是说话，它脊梁骨后头藏嘞，是咱一整套、鲜鲜活活嘞过法儿，一种活人嘞道理。
+            <fbr>[S1]活人嘞道理？哎，这你这一说，我嘞兴致“腾”一下就上来啦！觉住咱这嗑儿，一下儿从搞笑视频蹿到文化顶上了啊。那你赶紧给我白话白话，这里头到底有啥道道儿？我特别想知道——为啥一提起咱河南人，好些人脑子里“蹦”出来嘞头一个词儿，就是实在？这个实在，骨子里到底是啥嘞？ 
           </td>
           <td>Henanese (河南话)</td>
           <td class="ref-audio-container">
@@ -391,23 +397,23 @@
     <table class="demo-table">
       <thead>
         <tr>
-          <th style="width: 45%;">Text Input (with Non-Verbal Tags)</th>
-          <th style="width: 15%;">Target Style</th>
-          <th style="width: 20%;">Reference Audio</th>
-          <th style="width: 20%;">SoulX-Podcast Generated Audio</th>
+          <th style="width: 55%;">Text Input (with Non-Verbal Tags)</th>
+          <th style="width: 10%;">Target Style</th>
+          <th style="width: 17.5%;">Reference Audio</th>
+          <th style="width: 17.5%;">SoulX-Podcast Generated Audio</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
             [S1]哈喽，AI时代的冲浪先锋们！欢迎收听《AI生活进行时》，啊，一个充满了未来感，然后，还有一点点，<b>&lt;|laughter|&gt;</b> ，神经质的播客节目，我是主持人小希。
-            <br><br>[S2]<b>&lt;|throat_clearing|&gt;</b>，我是唠嗑。
-            <br><br>[S1]最近活得特别赛博朋克哈！以前觉得AI是科幻片里的，<b>&lt;|sigh|&gt;</b> 现在，现在连我妈都用AI写广场舞文案了。
-            <br><br>[S2]<b>&lt;|laughter|&gt;</b>这个例子特别生动。生成式AI已经从遥远概念变成日常工具，掀起了生产力变革。
-            <br><br>[S1]对的。
-            <br><br>[S2]所以今天咱们不聊"神经网络"这种头大的，嗯，就聊AI<b>&lt;|breathing|&gt;</b> 人工智能是怎么钻进普通人日常生活。
-            <br><br>[S1]嗯嗯，没错。
-            <br><br>[S2]<b>&lt;|coughing|&gt;</b>技术价值就是要体现在应用上！比如写作能力。我那个程序员朋友，用ChatGPT三分钟就能写出感情充沛的周报<b>&lt;|laughter|&gt;</b>把老板都看傻了。
+            <br>[S2]<b>&lt;|throat_clearing|&gt;</b>，我是唠嗑。
+            <br>[S1]最近活得特别赛博朋克哈！以前觉得AI是科幻片里的，<b>&lt;|sigh|&gt;</b> 现在，现在连我妈都用AI写广场舞文案了。
+            <br>[S2]<b>&lt;|laughter|&gt;</b>这个例子特别生动。生成式AI已经从遥远概念变成日常工具，掀起了生产力变革。
+            <br>[S1]对的。
+            <br>[S2]所以今天咱们不聊"神经网络"这种头大的，嗯，就聊AI<b>&lt;|breathing|&gt;</b> 人工智能是怎么钻进普通人日常生活。
+            <br>[S1]嗯嗯，没错。
+            <br>[S2]<b>&lt;|coughing|&gt;</b>技术价值就是要体现在应用上！比如写作能力。我那个程序员朋友，用ChatGPT三分钟就能写出感情充沛的周报<b>&lt;|laughter|&gt;</b>把老板都看傻了。
           </td> 
           <td>
             <b>Non-Verbal Sounds</b><br>
