@@ -40,26 +40,23 @@
       width: 100%;
       overflow: hidden;
     }
-    /* 滚动速度调慢（80秒/轮，数值越大越慢），保留无限循环 */
     .marquee-content {
       display: flex;
       animation: marquee 80s linear infinite;
-      will-change: transform; /* 提升动画流畅度 */
+      will-change: transform;
     }
     @keyframes marquee {
-      0% { transform: translateX(100%); } /* 从右侧完全进入 */
-      100% { transform: translateX(-100%); } /* 从左侧完全退出，无缝衔接 */
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
-    /* 可选：给链接加 hover 样式，提示可交互 */
     .marquee-content a {
-      color: #2563eb; /* 链接蓝色，适配多数页面风格 */
+      color: #2563eb;
       text-decoration: underline;
-      margin: 0 2px; /* 避免链接与前后文本贴太近 */
+      margin: 0 2px;
     }
     </style>
     
     <script>
-    // 精准控制动画暂停/播放（只针对滚动内容，不影响其他元素）
     function stopMarquee() {
       document.querySelector('.marquee-content').style.animationPlayState = 'paused';
     }
@@ -83,9 +80,7 @@
       <sup>1</sup> Audio, Speech and Language Processing Group (ASLP@NPU), Northwestern Polytechnical University, Xi’an, China <br>
       <sup>2</sup> Soul AI Lab, China <br>
     </p>
-      
   </div>
-
 
     <p align="center">
     📑 <a href="https://arxiv.org/abs/2509.18004">Paper</a> &nbsp&nbsp | &nbsp&nbsp 
@@ -100,9 +95,9 @@
       <nav style="
         background: rgba(0, 0, 0, 0.5);
         padding: 12px 24px;
-        display: inline-block;      /* 宽度随内容 */
+        display: inline-block;
         border-radius: 10px;
-        backdrop-filter: blur(6px); /* 毛玻璃，支持的浏览器会更好看 */
+        backdrop-filter: blur(6px);
       ">
         <a href="#abstract" class="nav-link">Abstract</a>
         <a href="#video" class="nav-link">Demo Video</a>
@@ -115,21 +110,58 @@
     </div>
     
     <style>
-      /* 链接样式：保持原字号，hover 变蓝+下划线 */
       .nav-link {
         color: white;
         margin: 0 15px;
         text-decoration: none;
-        font-size: 16px;             /* 你原来的大小 */
+        font-size: 16px;
         transition: color 0.2s, text-decoration 0.2s;
       }
       .nav-link:hover {
-        color: #66ccff;              /* 浅蓝色 hover */
+        color: #66ccff;
         text-decoration: underline;
       }
     </style>
 
-
+    <style>
+      /* 表格通用美化 */
+      .demo-table {
+        margin: 2em auto; /* 增加上下边距 */
+        width: 95%;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 1em;
+      }
+      .demo-table th, .demo-table td {
+        border: 1px solid #ccc;
+        padding: 12px 15px; /* 统一内边距 */
+        vertical-align: top; /* 重点：内容垂直居上对齐 */
+      }
+      /* 表头样式 */
+      .demo-table th {
+        background-color: #f4f4f4; /* 浅灰色背景 */
+        font-weight: 600; /* 字体加粗 */
+      }
+      /* 脚本列：左对齐 */
+      .demo-table td:first-child {
+        text-align: left;
+      }
+      /* 参考音频容器样式 */
+      .ref-audio-container {
+        text-align: left;
+        padding-left: 20px !important; /* 增加左内边距，使其美观 */
+      }
+      .ref-audio-container b {
+        font-size: 0.95em;
+        color: #333;
+      }
+      .ref-audio-container audio {
+        width: 100%; /* 宽度自适应 */
+        max-width: 250px;
+        margin-top: 4px;
+        margin-bottom: 8px; /* 增加播放器间距 */
+      }
+    </style>
     <h2 id="abstract" style="text-align: center;">Abstract<a name="abstract"></a></h2>
     <p style="text-align: justify;">Recent advances in text-to-speech (TTS) synthesis have significantly improved
       speech expressiveness and naturalness. However, most existing systems are tailored
@@ -169,7 +201,7 @@
 
     <h2 id="model overview" style="text-align: center;">Model Overview<a name="model overview"></a></h2>
     <div style="text-align:center;">
-      <img src="src/figs/soulxpodcast_infer.pdf" alt="Model overviewof SoulX-Podcast. The model supports cross-dialect prompting, where
+      <img src="src/figs/soulxpodcast_v3.png" alt="Model overview of SoulX-Podcast. The model supports cross-dialect prompting, where
       a Mandarin prompt can generate speech in target dialects with Dialect-Guided Prompting (DGP) method." style="width:80%; height:auto;">
     </div>
 
@@ -189,93 +221,88 @@
     <p style="text-align: center; color: #555; margin-top: 10px;">
       Demonstrate the naturalness and coherence of our model in multi-turn, multi-speaker podcast dialogue generation.</p>
 
-    <table style="margin: 0 auto; width: 95%; border-collapse: collapse; text-align: center; font-size: 1em;">
+    <table class="demo-table">
       <thead>
         <tr>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 40%;">Dialogue Script (Speaker Turns)</th>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 30%;">Reference Podcast Audio</th>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 30%;">SoulX-Podcast Generated Audio</th>
+          <th style="width: 45%;">Dialogue Script (Speaker Turns)</th>
+          <th style="width: 27.5%;">Reference Podcast Audio</th>
+          <th style="width: 27.5%;">SoulX-Podcast Generated Audio</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
+          <td>
             [S1] 嗯嗯，我想要再 call back 一下，你之前刚刚讲的是，在这个临床上面其实并不能够让它提效。这个是基于 Research 呢？还是基于政策在这个 Policy 这个 level 方面呢，不能提效。我不知道这个能不能帮我们 break down 一下？嗯。
-            [S2] 就一方面的话，其实还是技术本身。当然这个次技术，它是一个我觉得是有史以来最伟大的人工智能，在生物学的一个，就是进展和发现和一个提升。但是它还是会出现错误，还是会出现原子重叠的现象。所以这些错误在 biology 这个领域或者药物研发的领域，它是不能容错的，这是一个问题。
+            <br><br>[S2] 就一方面的话，其实还是技术本身。当然这个次技术，它是一个我觉得是有史以来最伟大的人工智能，在生物学的一个，就是进展和发现和一个提升。但是它还是会出现错误，还是会出现原子重叠的现象。所以这些错误在 biology 这个领域或者药物研发的领域，它是不能容错的，这是一个问题。
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/zh_1_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/zh_1_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/zh_1_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/zh_1_prompt_spk2.wav" type="audio/wav"></audio>
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_zh1.wav" type="audio/wav">
             </audio>
           </td>
         </tr>
-
-
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
+          <td>
             [S1] 对对对，物物源其实还是挺不错的。就比如说你早，你晚上去可能就没货了，但你早晨去一般都是有货的。像我今天早晨，嗯，他们一看了我就冲进去了。然后基本上平时想买买不到东西全部都有货。
-            [S2] 对，说到那个厕纸啊，你说就美国人为什么开始囤厕纸啊？我一开始以为这是谣言。然后呢，其实美国人一直没有反应，直到这上上周，就是呃那个股市熔断啊，然后再加上就是呃，就是宣布，就是各州紧急状况这样子发生。然后呢进超市要排队，结果呢我有，我在去超市的路上看到一对，就是中年夫妇吧，然后两个人两只手都捆满了厕纸。然后我才知道原来这件事情是真的。
+            <br><br>[S2] 对，说到那个厕纸啊，你说就美国人为什么开始囤厕纸啊？我一开始以为这是谣言。然后呢，其实美国人一直没有反应，直到这上上周，就是呃那个股市熔断啊，然后再加上就是呃，就是宣布，就是各州紧急状况这样子发生。然后呢进超市要排队，结果呢我有，我在去超市的路上看到一对，就是中年夫妇吧，然后两个人两只手都捆满了厕纸。然后我才知道原来这件事情是真的。
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/zh_2_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/zh_2_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/zh_2_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/zh_2_prompt_spk2.wav" type="audio/wav"></audio>
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_zh2.wav" type="audio/wav">
             </audio>
           </td>
         </tr>
-        
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
+          <td>
             [S1] I'm sorry for snapping. That was very unprofessional of me. Let's move to the recap of the match.
-            [S2] Right it was it was kind of a great one though I mean you gotta admit Alice even though your surrogate did not claim the victory it was really a legendary match almost
-            [S1] It really was It was one for the books absolutely Survay and Cerceiv were supposed to meet uh in only four bouts, but there was a bit of a disturbance early on in the match. 
-            [S2] Yeah, somebody got onto the field. They were shouting something. I couldn't hear it, Alice. And honestly, I was just glad when the guards finally dragged them away. I just wanted to get back to the joust, but it did disturb the entire thing. And it riled the crowd up too, which was surprising. 
-            [S1] It's true, it later reports came out that the person who stormed the field to cause such a ruckus was a protester against Against your uncle, the emperor. 
-            [S2] Why would anybody want to protest against my uncle, the emperor? The single greatest living human person, maybe even greater than human person on the face of this planet or any other, you know. 
-            [S2] Of course, the emperor is benevolent and generous and A very very kind ruler.  
+            <br><br>[S2] Right it was it was kind of a great one though I mean you gotta admit Alice even though your surrogate did not claim the victory it was really a legendary match almost
+            <br><br>[S1] It really was It was one for the books absolutely Survay and Cerceiv were supposed to meet uh in only four bouts, but there was a bit of a disturbance early on in the match. 
+            <br><br>[S2] Yeah, somebody got onto the field. They were shouting something. I couldn't hear it, Alice. And honestly, I was just glad when the guards finally dragged them away. I just wanted to get back to the joust, but it did disturb the entire thing. And it riled the crowd up too, which was surprising. 
+            <br><br>[S1] It's true, it later reports came out that the person who stormed the field to cause such a ruckus was a protester against Against your uncle, the emperor. 
+            <br><br>[S2] Why would anybody want to protest against my uncle, the emperor? The single greatest living human person, maybe even greater than human person on the face of this planet or any other, you know. 
+            <br><br>[S2] Of course, the emperor is benevolent and generous and A very very kind ruler.  
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/en_1_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/en_1_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/en_1_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/en_1_prompt_spk2.wav" type="audio/wav"></audio>
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_en1.wav" type="audio/wav">
             </audio>  
           </td>
         </tr>
-
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
+          <td>
             [S1] OK, so the question I've been asking everybody to start with is how did you get into magic? 
-            [S2] So, this is phenomenal, actually. I have a fun little tidbit, just recently. Isn't a few days ago, I got a little pop up on my Facebook, um, in my Facebook memories, if that makes sense. Where it actually reminded me of the exact day, literally the exact day that I learned how to play Magic. And it was 9 years ago, and I learned how to play Magic. I'm from Southern California. I had just moved to San Diego, and I didn't know anyone. I knew like four people in the entire city. 
+            <br><br>[S2] So, this is phenomenal, actually. I have a fun little tidbit, just recently. Isn't a few days ago, I got a little pop up on my Facebook, um, in my Facebook memories, if that makes sense. Where it actually reminded me of the exact day, literally the exact day that I learned how to play Magic. And it was 9 years ago, and I learned how to play Magic. I'm from Southern California. I had just moved to San Diego, and I didn't know anyone. I knew like four people in the entire city. 
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/en_2_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/en_2_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/en_2_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/en_2_prompt_spk2.wav" type="audio/wav"></audio>
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_en2.wav" type="audio/wav">
             </audio>  
           </td>
         </tr>
-
       </tbody>
     </table>
 
@@ -283,81 +310,77 @@
     <h2 id="dialect-demo" style="text-align: center;">Dialectal Controls: Cross-Dialect Synthesis<a name="dialect-demo"></a></h2>
     <p style="text-align: center; color: #555; margin-top: 10px;">Demonstrate the model's ability to generate speech in different Chinese dialects (such as Cantonese, Sichuanese, and Henanese), including dialect switching and voice color preservation.</p>
 
-    <table style="margin: 0 auto; width: 95%; border-collapse: collapse; text-align: center; font-size: 1em;">
+    <table class="demo-table">
       <thead>
         <tr>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 50%;">Target Dialect</th>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 25%;">Reference Audio (Source Speaker)</th>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 25%;">SoulX-Podcast Generated Audio</th>
+          <th style="width: 45%;">Dialogue Script</th>
+          <th style="width: 15%;">Target Dialect</th>
+          <th style="width: 20%;">Reference Audio (Source Speaker)</th>
+          <th style="width: 20%;">SoulX-Podcast Generated Audio</th>
         </tr>
       </thead>
       <tbody>
-
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
-          [S1] 哈囉大家好啊，歡迎收聽我哋嘅節目。喂，我今日想問你樣嘢啊，你覺唔覺得，嗯，而家揸電動車，最煩，最煩嘅一樣嘢係咩啊？
-          [S2] 梗係充電啦。大佬啊，搵個位都已經好煩，搵到個位仲要喺度等，你話快極都要半個鐘一個鐘，真係，有時諗起都覺得好冇癮。
-          [S1] 係咪先。如果我而家同你講，充電可以快到同入油差唔多時間，你信唔信先？喂你平時喺油站入滿一缸油，要幾耐啊？五六分鐘？
-          [S2] 差唔多啦，七八分鐘，點都走得啦。電車喎，可以做到咁快？你咪玩啦。
+          <td>
+            [S1] 哈囉大家好啊，歡迎收聽我哋嘅節目。喂，我今日想問你樣嘢啊，你覺唔覺得，嗯，而家揸電動車，最煩，最煩嘅一樣嘢係咩啊？
+            <br><br>[S2] 梗係充電啦。大佬啊，搵個位都已經好煩，搵到個位仲要喺度等，你話快極都要半個鐘一個鐘，真係，有時諗起都覺得好冇癮。
+            <br><br>[S1] 係咪先。如果我而家同你講，充電可以快到同入油差唔多時間，你信唔信先？喂你平時喺油站入滿一缸油，要幾耐啊？五六分鐘？
+            <br><br>[S2] 差唔多啦，七八分鐘，點都走得啦。電車喎，可以做到咁快？你咪玩啦。
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">Cantonese (粤语)</td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/podcast_yue_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/podcast_yue_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td>Cantonese (粤语)</td>
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/podcast_yue_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/podcast_yue_prompt_spk2.wav" type="audio/wav"></audio>
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_yue.wav" type="audio/wav">
             </audio>
           </td>
         </tr>
-
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
-          [S1]各位《巴适得板》的听众些，大家好噻！我是你们主持人晶晶。今儿天气硬是巴适，不晓得大家是在赶路嘛，还是茶都泡起咯，准备跟我们好生摆一哈龙门阵喃？
-          [S2]晶晶好哦，大家安逸噻！我是李老倌。你刚开口就川味十足，"摆龙门阵"几个字一甩出来，我鼻子头都闻到茶香跟火锅香咯！
-          [S1]就是得嘛！李老倌，我前些天带个外地朋友切人民公园鹤鸣茶社坐了一哈。他硬是搞不醒豁，为啥子我们一堆人围到杯茶就可以吹一下午壳子，从隔壁子王嬢嬢娃儿耍朋友，扯到美国大选，中间还掺几盘斗地主。他说我们四川人简直是把"摸鱼"刻进骨子里头咯！
-          [S2]哈哈，你那个朋友说得倒是有点儿趣，但他莫看到精髓噻。"摆龙门阵"哪是摸鱼嘛，这是我们川渝人特有的交际方式，更是一种活法。外省人天天说的"松弛感"，根根儿就在这龙门阵里头。今天我们就要好生摆一哈，为啥子四川人活得这么舒坦。就先从茶馆这个老窝子说起，看它咋个成了我们四川人的魂儿！
+          <td>
+            [S1]各位《巴适得板》的听众些，大家好噻！我是你们主持人晶晶。今儿天气硬是巴适，不晓得大家是在赶路嘛，还是茶都泡起咯，准备跟我们好生摆一哈龙门阵喃？
+            <br><br>[S2]晶晶好哦，大家安逸噻！我是李老倌。你刚开口就川味十足，"摆龙门阵"几个字一甩出来，我鼻子头都闻到茶香跟火锅香咯！
+            <br><br>[S1]就是得嘛！李老倌，我前些天带个外地朋友切人民公园鹤鸣茶社坐了一哈。他硬是搞不醒豁，为啥子我们一堆人围到杯茶就可以吹一下午壳子，从隔壁子王嬢嬢娃儿耍朋友，扯到美国大选，中间还掺几盘斗地主。他说我们四川人简直是把"摸鱼"刻进骨子里头咯！
+            <br><br>[S2]哈哈，你那个朋友说得倒是有点儿趣，但他莫看到精髓噻。"摆龙门阵"哪是摸鱼嘛，这是我们川渝人特有的交际方式，更是一种活法。外省人天天说的"松弛感"，根根儿就在这龙门阵里头。今天我们就要好生摆一哈，为啥子四川人活得这么舒坦。就先从茶馆这个老窝子说起，看它咋个成了我们四川人的魂儿！
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">Sichuanese (四川话)</td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/podcast_sichuan_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/podcast_sichuan_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td>Sichuanese (四川话)</td>
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/podcast_sichuan_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/podcast_sichuan_prompt_spk2.wav" type="audio/wav"></audio>
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_sichuan_furuina_xuzhisheng_short.wav" type="audio/wav">
             </audio>
           </td>
         </tr>
-
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
+          <td>
             [S1]哎，大家好啊，欢迎收听咱这一期嘞《瞎聊呗，就这么说》，我是恁嘞老朋友，燕子。
-            [S2]大家好，我是老张。燕子啊，今儿瞅瞅你这个劲儿，咋着，是有啥可得劲嘞事儿想跟咱唠唠？
-            [S1]哎哟，老张，你咋恁懂我嘞！我跟你说啊，最近我刷手机，老是刷住些可逗嘞方言视频，特别是咱河南话，咦～我哩个乖乖，一听我都憋不住笑，咋说嘞，得劲儿哩很，跟回到家一样。
-            [S2]哈哈哈哈，你这回可算说到根儿上了！河南话，咱往大处说说，中原官话，它真嘞是有一股劲儿搁里头。它可不光是说话，它脊梁骨后头藏嘞，是咱一整套、鲜鲜活活嘞过法儿，一种活人嘞道理。
-            [S1]活人嘞道理？哎，这你这一说，我嘞兴致“腾”一下就上来啦！觉住咱这嗑儿，一下儿从搞笑视频蹿到文化顶上了啊。那你赶紧给我白话白话，这里头到底有啥道道儿？我特别想知道——为啥一提起咱河南人，好些人脑子里“蹦”出来嘞头一个词儿，就是实在？这个实在，骨子里到底是啥嘞？ 
+            <br><br>[S2]大家好，我是老张。燕子啊，今儿瞅瞅你这个劲儿，咋着，是有啥可得劲嘞事儿想跟咱唠唠？
+            <br><br>[S1]哎哟，老张，你咋恁懂我嘞！我跟你说啊，最近我刷手机，老是刷住些可逗嘞方言视频，特别是咱河南话，咦～我哩个乖乖，一听我都憋不住笑，咋说嘞，得劲儿哩很，跟回到家一样。
+            <br><br>[S2]哈哈哈哈，你这回可算说到根儿上了！河南话，咱往大处说说，中原官话，它真嘞是有一股劲儿搁里头。它可不光是说话，它脊梁骨后头藏嘞，是咱一整套、鲜鲜活活嘞过法儿，一种活人嘞道理。
+            <br><br>[S1]活人嘞道理？哎，这你这一说，我嘞兴致“腾”一下就上来啦！觉住咱这嗑儿，一下儿从搞笑视频蹿到文化顶上了啊。那你赶紧给我白话白话，这里头到底有啥道道儿？我特别想知道——为啥一提起咱河南人，好些人脑子里“蹦”出来嘞头一个词儿，就是实在？这个实在，骨子里到底是啥嘞？ 
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">Cantonese (粤语)</td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/podcast_henan_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/podcast_henan_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td>Henanese (河南话)</td>
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/podcast_henan_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/podcast_henan_prompt_spk2.wav" type="audio/wav"></audio>
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_henan.wav" type="audio/wav">
             </audio>
           </td>
         </tr>
-
-
       </tbody>
     </table>
 
@@ -365,41 +388,43 @@
     <h2 id="paralinguistic-demo" style="text-align: center;">Paralinguistic Controls: Emotion & Style<a name="paralinguistic-demo"></a></h2>
     <p style="text-align: center; color: #555; margin-top: 10px;">Demonstrate the model's ability to control non-linguistic information (such as emotion, speech rate, and pauses) in speech.</p>
 
-    <table style="margin: 0 auto; width: 95%; border-collapse: collapse; text-align: center; font-size: 1em;">
+    <table class="demo-table">
       <thead>
         <tr>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 30%;">Text Input</th>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 20%;">Target Emotion/Style</th>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 25%;">Reference Audio (Target Emotion)</th>
-          <th style="border: 1px solid #ccc; padding: 12px; width: 25%;">SoulX-Podcast Generated Audio</th>
+          <th style="width: 45%;">Text Input (with Non-Verbal Tags)</th>
+          <th style="width: 15%;">Target Style</th>
+          <th style="width: 20%;">Reference Audio</th>
+          <th style="width: 20%;">SoulX-Podcast Generated Audio</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="border: 1px solid #ccc; padding: 12px; text-align: left;">
-          [S1]哈喽，AI时代的冲浪先锋们！欢迎收听《AI生活进行时》，啊，一个充满了未来感，然后，还有一点点，<|laughter|> ，神经质的播客节目，我是主持人小希。
-          [S2]<|throat_clearing|>，我是唠嗑。
-          [S1]最近活得特别赛博朋克哈！以前觉得AI是科幻片里的，<|sigh|> 现在，现在连我妈都用AI写广场舞文案了。
-          [S2]<|laughter|>这个例子特别生动。生成式AI已经从遥远概念变成日常工具，掀起了生产力变革。
-          [S1]对的。
-          [S2]所以今天咱们不聊"神经网络"这种头大的，嗯，就聊AI<|breathing|> 人工智能是怎么钻进普通人日常生活。
-          [S1]嗯嗯，没错。
-          [S2]<|coughing|>技术价值就是要体现在应用上！比如写作能力。我那个程序员朋友，用ChatGPT三分钟就能写出感情充沛的周报<|laughter|>把老板都看傻了。
+          <td>
+            [S1]哈喽，AI时代的冲浪先锋们！欢迎收听《AI生活进行时》，啊，一个充满了未来感，然后，还有一点点，<b>&lt;|laughter|&gt;</b> ，神经质的播客节目，我是主持人小希。
+            <br><br>[S2]<b>&lt;|throat_clearing|&gt;</b>，我是唠嗑。
+            <br><br>[S1]最近活得特别赛博朋克哈！以前觉得AI是科幻片里的，<b>&lt;|sigh|&gt;</b> 现在，现在连我妈都用AI写广场舞文案了。
+            <br><br>[S2]<b>&lt;|laughter|&gt;</b>这个例子特别生动。生成式AI已经从遥远概念变成日常工具，掀起了生产力变革。
+            <br><br>[S1]对的。
+            <br><br>[S2]所以今天咱们不聊"神经网络"这种头大的，嗯，就聊AI<b>&lt;|breathing|&gt;</b> 人工智能是怎么钻进普通人日常生活。
+            <br><br>[S1]嗯嗯，没错。
+            <br><br>[S2]<b>&lt;|coughing|&gt;</b>技术价值就是要体现在应用上！比如写作能力。我那个程序员朋友，用ChatGPT三分钟就能写出感情充沛的周报<b>&lt;|laughter|&gt;</b>把老板都看傻了。
           </td> 
-          
-          <td style="border: 1px solid #ccc; padding: 12px;">
-            <audio controls style="width: 90%; max-width: 250px;">
-              "spk1": <source src="raw/prompt/podcast_nonverbal_prompt_spk1.wav" type="audio/wav">
-              "spk2": <source src="raw/prompt/podcast_nonverbal_prompt_spk2.wav" type="audio/wav">
-            </audio>
+          <td>
+            <b>Non-Verbal Sounds</b><br>
+            (Laughter, Sigh, Clearing Throat, etc.)
           </td>
-          <td style="border: 1px solid #ccc; padding: 12px;">
+          <td class="ref-audio-container">
+            <b>Speaker 1:</b>
+            <audio controls><source src="raw/prompt/podcast_nonverbal_prompt_spk1.wav" type="audio/wav"></audio>
+            <b>Speaker 2:</b>
+            <audio controls><source src="raw/prompt/podcast_nonverbal_prompt_spk2.wav" type="audio/wav"></audio>
+          </td>
+          <td>
             <audio controls style="width: 90%; max-width: 250px;">
               <source src="raw/samples/podcast_nonverbal.wav" type="audio/wav">
             </audio>
           </td>
         </tr>
-        
       </tbody>
     </table>
 
@@ -407,26 +432,34 @@
     <h2 id="longform-demo" style="text-align: center;">Long-form Podcast: Coherence and Stability<a name="longform-demo"></a></h2>
     <p style="text-align: center; color: #555; margin-top: 10px;">Demonstrate the model's ability to generate long-form podcast conversations (over 60 minutes) with stable voice colors and coherent emotional continuity.</p>
 
-    <div style="margin: 20px auto; width: 80%; max-width: 900px; text-align: left; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+    <div style="margin: 20px auto; width: 80%; max-width: 900px; text-align: left; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
       <h3 style="text-align: center; margin-top: 0;">Long-form Podcast Conversation (~60 Minutes)</h3>
-      <p style="font-size: 14px; margin-bottom: 10px; color: #777;">
-        Topic: Discussion of the 《Psychological Decoding》.
-        <source src="raw/text/long_text.txt" type="text/plain">
+      <p style="font-size: 14px; margin-bottom: 20px; color: #555; text-align: center;">
+        <b>Topic:</b> Discussion of the 《Psychological Decoding》.
+        (<a href="raw/text/long_text.txt" target="_blank">View Full Script</a>)
       </p>
+      
       <div style="margin-bottom: 20px;">
-        <p style="font-weight: bold; margin-bottom: 5px;">Reference Audio:</p>
-        <audio controls style="width: 100%;">
-          "spk1": <source src="raw/prompt/podcast_long_prompt_spk1.wav" type="audio/wav">
-          "spk2": <source src="raw/prompt/podcast_long_prompt_spk2.wav" type="audio/wav">
+        <p style="font-weight: bold; margin-bottom: 5px; color: #333;">Reference Audio:</p>
+        <b>Speaker 1 Prompt:</b>
+        <audio controls style="width: 100%; margin-top: 5px;">
+          <source src="raw/prompt/podcast_long_prompt_spk1.wav" type="audio/wav">
+        </audio>
+        <br>
+        <b>Speaker 2 Prompt:</b>
+        <audio controls style="width: 100%; margin-top: 8px;">
+          <source src="raw/prompt/podcast_long_prompt_spk2.wav" type="audio/wav">
         </audio>
       </div>
-      <div style="margin-bottom: 0;">
-        <p style="font-weight: bold; margin-bottom: 5px;">SoulX-Podcast Generated Audio:</p>
+      
+      <div>
+        <p style="font-weight: bold; margin-bottom: 5px; color: #333;">SoulX-Podcast Generated Audio (Full):</p>
         <audio controls style="width: 100%;">
           <source src="raw/samples/podcast_long_v3.mp3" type="audio/mp3">
         </audio>
       </div>
-      <p style="font-size: 12px; text-align: right; margin-top: 10px; color: #999;">
+      
+      <p style="font-size: 12px; text-align: right; margin-top: 15px; color: #888;">
         *It is recommended to use headphones to evaluate the consistency of voice colors and the fluency of the conversation.*
       </p>
     </div>
