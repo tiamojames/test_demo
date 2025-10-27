@@ -170,23 +170,9 @@
       }
     </style>
     <h2 id="abstract" style="text-align: center;">Abstract<a name="abstract"></a></h2>
-    <p style="text-align: justify;">Recent advances in text-to-speech (TTS) synthesis have significantly improved
-      speech expressiveness and naturalness. However, most existing systems are tailored
-      for single-speaker synthesis and fall short in generating coherent multi-speaker
-      conversational speech. This technical report presents SoulX-Podcast, a system
-      designed for multi-turn, multi-speaker conversational speech generation while si-
-      multaneously achieving state-of-the-art performance in conventional TTS tasks. To
-      meet the higher naturalness demands of multi-turn spoken dialogue, SoulX-Podcast
-      integrates a range of paralinguistic controls and supports both Mandarin and En-
-      glish, as well as several Chinese dialects, including Sichuanese, Henanese, and
-      Cantonese, enabling more personalized podcast-style speech generation. Experi-
-      mental results demonstrate that SoulX-Podcast can continuously produce over 90
-      minutes of conversation with stable speaker timbre and smooth speaker transitions.
-      Moreover, speakers exhibit contextually adaptive prosody, reflecting natural rhythm
-      and intonation changes as dialogues progress. Across multiple evaluation metrics,
-      SoulX-Podcast achieves state-of-the-art performance in both single-speaker TTS
-      and multi-turn conversational speech synthesis.</p>
-
+    <p style="text-align: justify;">Recent advances in text-to-speech (TTS) synthesis have significantly improved speech expressiveness and naturalness. However, most existing systems are tailored for single-speaker synthesis and fall short in generating coherent multi-speaker conversational speech. This technical report presents SoulX-Podcast, a system designed for podcast-style multi-turn, multi-speaker dialogic speech generation, while also achieving state-of-the-art performance in conventional text-to-speech (TTS) tasks.
+      To meet the higher naturalness demands of multi-turn spoken dialogue, SoulX-Podcast integrates a range of paralinguistic controls and supports both Mandarin and English, as well as several Chinese dialects, including Sichuanese, Henanese, and Cantonese, enabling more personalized podcast-style speech generation. Experimental results demonstrate that SoulX-Podcast can continuously produce over 90 minutes of conversation with stable speaker timbre and smooth speaker transitions. Moreover, speakers exhibit contextually adaptive prosody, reflecting natural rhythm and intonation changes as dialogues progress. Across multiple evaluation metrics, SoulX-Podcast achieves state-of-the-art performance in both monologue TTS and multi-turn conversational speech synthesis.
+    </p>
 
     <h2 id="video" style="text-align:center;">Demo Video</h2>
     
@@ -209,7 +195,7 @@
     <h2 id="model_overview" style="text-align: center;">Model Overview<a name="model overview"></a></h2>
     <div style="text-align:center;">
       <img src="src/figs/soulxpodcast_v3.png" alt="Model overview of SoulX-Podcast. The model supports cross-dialect prompting, where
-      a Mandarin prompt can generate speech in target dialects with Dialect-Guided Prompting (DGP) method." style="width:80%; height:auto;">
+      a Mandarin prompt can generate speech in target dialects with Dialect-Guided Prompting (DGP) method." style="width:60%; height:auto;">
     </div>
 
     <h2 id="pipeline" style="text-align: center;">SoulX-Data-Pipeline<a name="pipeline"></a></h2>
@@ -220,7 +206,7 @@
       further information is extracted and annotated</p>
 
     <div style="text-align:center;">
-      <img src="src/figs/soulx_datapipeline_v3.png" alt="Processing pipeline for in-the-wild dialogue speech data" style="width:80%; height:auto;">
+      <img src="src/figs/soulx_datapipeline_v3.png" alt="Processing pipeline for in-the-wild dialogue speech data" style="width:60%; height:auto;">
     </div>
 
     <hr>
@@ -373,7 +359,7 @@
             <br>[S2]大家好，我是老张。燕子啊，今儿瞅瞅你这个劲儿，咋着，是有啥可得劲嘞事儿想跟咱唠唠？
             <br>[S1]哎哟，老张，你咋恁懂我嘞！我跟你说啊，最近我刷手机，老是刷住些可逗嘞方言视频，特别是咱河南话，咦～我哩个乖乖，一听我都憋不住笑，咋说嘞，得劲儿哩很，跟回到家一样。
             <br>[S2]哈哈哈哈，你这回可算说到根儿上了！河南话，咱往大处说说，中原官话，它真嘞是有一股劲儿搁里头。它可不光是说话，它脊梁骨后头藏嘞，是咱一整套、鲜鲜活活嘞过法儿，一种活人嘞道理。
-            <fbr>[S1]活人嘞道理？哎，这你这一说，我嘞兴致“腾”一下就上来啦！觉住咱这嗑儿，一下儿从搞笑视频蹿到文化顶上了啊。那你赶紧给我白话白话，这里头到底有啥道道儿？我特别想知道——为啥一提起咱河南人，好些人脑子里“蹦”出来嘞头一个词儿，就是实在？这个实在，骨子里到底是啥嘞？ 
+            <br>[S1]活人嘞道理？哎，这你这一说，我嘞兴致“腾”一下就上来啦！觉住咱这嗑儿，一下儿从搞笑视频蹿到文化顶上了啊。那你赶紧给我白话白话，这里头到底有啥道道儿？我特别想知道——为啥一提起咱河南人，好些人脑子里“蹦”出来嘞头一个词儿，就是实在？这个实在，骨子里到底是啥嘞？ 
           </td>
           <td>Henanese (河南话)</td>
           <td class="ref-audio-container">
@@ -392,8 +378,8 @@
     </table>
 
     <hr>
-    <h2 id="paralinguistic-demo" style="text-align: center;">Paralinguistic Controls: Emotion & Style<a name="paralinguistic-demo"></a></h2>
-    <p style="text-align: center; color: #555; margin-top: 10px;">Demonstrate the model's ability to control non-linguistic information (such as emotion, speech rate, and pauses) in speech.</p>
+    <h2 id="paralinguistic-demo" style="text-align: center;">Paralinguistic Controls: Sound Events <a name="paralinguistic-demo"></a></h2>
+    <p style="text-align: center; color: #555; margin-top: 10px;">Demonstrate the model's ability to control non-linguistic information (such as laughter, sigh, clearing throat, etc.) in speech.</p>
 
     <table class="demo-table">
       <thead>
