@@ -424,7 +424,7 @@
     <hr>
     <h2 id="longform-demo" style="text-align: center;">Long-form Podcast: Coherence and Stability<a name="longform-demo"></a></h2>
     <p style="text-align: center; color: #555; margin-top: 10px;">Demonstrate the model's ability to generate long-form podcast conversations (over 60 minutes) with stable voice colors and coherent emotional continuity.</p>
-
+    
     <div style="margin: 20px auto; width: 80%; max-width: 900px; text-align: left; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
       <h3 style="text-align: center; margin-top: 0;">Long-form Podcast Conversation (~60 Minutes)</h3>
       <p style="font-size: 14px; margin-bottom: 20px; color: #555; text-align: center;">
@@ -435,22 +435,153 @@
       <div style="margin-bottom: 20px;">
         <p style="font-weight: bold; margin-bottom: 5px; color: #333;">Reference Audio:</p>
         <b>Speaker 1 Prompt:</b>
-        <audio controls style="width: 100%; margin-top: 5px;">
+        <audio id="audio-prompt-spk1" controls style="width: 100%; margin-top: 5px;">
           <source src="raw/prompt/podcast_long_prompt_spk1.wav" type="audio/wav">
         </audio>
         <br>
         <b>Speaker 2 Prompt:</b>
-        <audio controls style="width: 100%; margin-top: 8px;">
+        <audio id="audio-prompt-spk2" controls style="width: 100%; margin-top: 8px;">
           <source src="raw/prompt/podcast_long_prompt_spk2.wav" type="audio/wav">
         </audio>
       </div>
       
       <div>
         <p style="font-weight: bold; margin-bottom: 5px; color: #333;">SoulX-Podcast Generated Audio (Full):</p>
-        <audio controls style="width: 100%;">
+        <audio id="audio-podcast" controls style="width: 100%;">
           <source src="raw/samples/podcast_long_v3.mp3" type="audio/mp3">
         </audio>
       </div>
+      
+      <div class="sync-block">
+        <div class="transcript" id="transcript-longform" style="max-height: 40vh; overflow:auto; padding:8px; border:1px solid #ddd; border-radius:10px; background:#fff;">
+          <!-- 这里的文本将会根据 JSON 文件动态加载并同步滚动 -->
+        </div>
+      </div>
+      
+      <p style="font-size: 12px; text-align: right; margin-top: 15px; color: #888;">
+        *It is recommended to use headphones to evaluate the consistency of voice colors and the fluency of the conversation.*
+      </p>
+    </div>
+    
+    <script>
+      // 假设 JSON 文件路径为 assets/text/longform_timestamps.json
+      const transcriptData = "raw/text/longform_timestamps.json"; // JSON 文件路径
+    
+      // 时间戳同步播放器类
+      class SyncPlayer {
+        constructor(audioId, transcriptId, segments) {
+          this.audio = document.getElementById(audioId);
+          this.transEl = document.getElementById(transcriptId);
+          this.idx = -1;
+          this.segments = segments.slice().sort((a, b) => a.start - b.start);
+          for (let i = 0; i < this.segments.length; i++) {
+            const cur = this.segments[i], nxt = this.segments[i + 1];
+            if (cur.end == null) cur.end = nxt ? nxt.start : Infinity;
+          }
+          this.shouldScroll = false;
+          this.render(); 
+          this.bind();
+        }
+    
+        esc(s) {
+          return String(s || '').replace(/[&<>"']/g, ch => (
+            {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]
+          ));
+        }
+    
+        render() {
+          this.transEl.innerHTML = '';
+          this.segments.forEach((seg, i) => {
+            const d = document.createElement('div');
+            d.className = 'line';
+            d.dataset.idx = i;
+            d.innerHTML = `
+              <div class="ts">${this.formatTime(seg.start)}</div>
+              <div class="spk">${this.esc(seg.speaker || '')}</div>
+              <div class="txt">${this.esc(seg.text)}</div>
+            `;
+            d.onclick = () => this.seek(seg.start, true, true);
+            this.transEl.appendChild(d);
+          });
+        }
+    
+        formatTime(t) {
+          const m = Math.floor(t / 60), s = Math.floor(t % 60), ms = Math.floor((t - Math.floor(t)) * 1000);
+          return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${String(ms).padStart(3, '0')}`;
+        }
+    
+        seek(t, autoplay = false, scroll = false) {
+          this.shouldScroll = !!scroll;
+          this.audio.currentTime = Math.max(0, t);
+          if (autoplay) this.audio.play().catch(() => {});
+        }
+    
+        findIdx(t) {
+          let lo = 0, hi = this.segments.length - 1, ans = -1;
+          while (lo <= hi) {
+            const mid = (lo + hi) >> 1, seg = this.segments[mid];
+            if (t < seg.start) hi = mid - 1;
+            else if (t >= seg.end) lo = mid + 1;
+            else { ans = mid; break; }
+          }
+          return ans;
+        }
+    
+        setActive(i, scroll = true) {
+          const prev = this.idx >= 0 ? this.transEl.querySelector(`.line[data-idx="${this.idx}"]`) : null;
+          const next = i >= 0 ? this.transEl.querySelector(`.line[data-idx="${i}"]`) : null;
+    
+          if (i === this.idx) {
+            if (scroll && next) {
+              const c = this.transEl;
+              const targetTop = next.offsetTop - c.offsetTop;
+              const maxTop = c.scrollHeight - c.clientHeight;
+              c.scrollTo({ top: Math.max(0, Math.min(targetTop, maxTop)), behavior: 'smooth' });
+            }
+            return;
+          }
+          if (prev) prev.classList.remove('active');
+          if (next) {
+            next.classList.add('active');
+            if (scroll) {
+              const c = this.transEl;
+              const targetTop = next.offsetTop - c.offsetTop;
+              const maxTop = c.scrollHeight - c.clientHeight;
+              c.scrollTo({ top: Math.max(0, Math.min(targetTop, maxTop)), behavior: 'smooth' });
+            }
+          }
+          this.idx = i;
+        }
+    
+        onTime() {
+          const i = this.findIdx(this.audio.currentTime);
+          const doScroll = !this.audio.paused;
+          this.setActive(i, doScroll);
+        }
+    
+        bind() {
+          const t = () => this.onTime();
+          this.audio.addEventListener('timeupdate', t);
+          this.audio.addEventListener('seeked', () => { this.shouldScroll = true; this.onTime(); });
+          this.audio.addEventListener('seeking', () => { this.shouldScroll = true; });
+          this.audio.addEventListener('play', t);
+          this.audio.addEventListener('loadedmetadata', () => {
+            const dur = isFinite(this.audio.duration) ? this.audio.duration : Infinity;
+            for (let i = 0; i < this.segments.length; i++) {
+              if (this.segments[i].end === Infinity) this.segments[i].end = dur;
+            }
+          });
+        }
+      }
+    
+      // 初始化并加载 JSON 数据
+      fetch(transcriptData)
+        .then(response => response.json())
+        .then(data => {
+          new SyncPlayer('audio-podcast', 'transcript-longform', data);
+        })
+        .catch(error => console.error('Error loading transcript data:', error));
+    </script>
       
       <p style="font-size: 12px; text-align: right; margin-top: 15px; color: #888;">
         *It is recommended to use headphones to evaluate the consistency of voice colors and the fluency of the conversation.*
